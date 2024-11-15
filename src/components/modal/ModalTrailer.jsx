@@ -49,25 +49,28 @@ export const ModalTrailer = ({dataId, type, language}) => {
           alt="play icon image"
           className="mr-2"
         />
-        {t("Watch Trailer")}
+        {t("Watch Now")}
       </button>
 
       <Dialog
         visible={visible}
         modal={false}
-        className="transition-all p-4 w-full  md:w-[1050px] md:h-[650px] m-auto my-auto"
+        className="transition-all p-4 w-full  h-[450px] md:w-[1800px] md:h-[780px] mx-auto my-auto"
         onHide={() => {
           if (!visible) return
           setVisible(false)
         }}
       >
-        <lite-youtube
+       {/*  <lite-youtube
           videoplay={t("Watch Trailer")}
           posterquality="maxresdefault"
           params="controls=0mute=0&enablejsapi=1&origin=https://movie-finder-3000.netlify.app"
           videoid={video?.key}
           videotitle={video?.name}
-        ></lite-youtube>
+        ></lite-youtube> */}
+
+         <iframe src={`https://stream8.xyz/showvid.php?cat=${type}&xid=${dataId}`} width="100%" height="100%" allow="fullscreen" frameBorder="0" scrolling="no"></iframe> 
+
       </Dialog>
     </div>
   )

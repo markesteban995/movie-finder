@@ -61,10 +61,10 @@ export function Header() {
           <LazyLoadImage
             src="/cinema-film-movie-svgrepo-com.svg"
             className="h-11 aspect-square"
-            alt="Movie Finder Logo"
+            alt="Stream8 Logo"
           />
           <span className="text-left text-white text-xl md:text-2xl font-bold">
-            Movie Finder
+            Stream8
           </span>
         </Link>
         <div className="hidden items-center gap-x-2 lg:flex">
