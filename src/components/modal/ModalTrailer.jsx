@@ -6,6 +6,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component"
 
 export const ModalTrailer = ({dataId, type, language}) => {
   const [visible, setVisible] = useState(false)
+  const [visible2, setVisible2] = useState(false)
   const {t} = useTranslation()
 
   const {
@@ -31,7 +32,7 @@ export const ModalTrailer = ({dataId, type, language}) => {
       ]
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center gap-2">
       <button
         role="button"
         className={`${
@@ -49,9 +50,29 @@ export const ModalTrailer = ({dataId, type, language}) => {
           alt="play icon image"
           className="mr-2"
         />
-        {t("Watch Now")}
+        {t("Server 1")}
       </button>
-
+      {type==="movie" &&
+      <button
+        role="button"
+        className={`${
+          data.results?.length > 0
+            ? "opacity-1 hover:opacity-80 hover:scale-105 transition-all"
+            : "opacity-50"
+        } flex items-center  border-2 border-blue-500 rounded-2xl p-5`}
+        onClick={() => setVisible2(true)}
+        disabled={data.results?.length > 0 ? false : true}
+      >
+        <LazyLoadImage
+          src="/play-svg.svg"
+          height={25}
+          width={25}
+          alt="play icon image"
+          className="mr-2"
+        />
+        {t("Server 2")}
+      </button>
+      } 
       <Dialog
         visible={visible}
         modal={false}
@@ -61,15 +82,19 @@ export const ModalTrailer = ({dataId, type, language}) => {
           setVisible(false)
         }}
       >
-       {/*  <lite-youtube
-          videoplay={t("Watch Trailer")}
-          posterquality="maxresdefault"
-          params="controls=0mute=0&enablejsapi=1&origin=https://movie-finder-3000.netlify.app"
-          videoid={video?.key}
-          videotitle={video?.name}
-        ></lite-youtube> */}
+           <iframe src={`https://stream8.xyz/showvid.php?cat=${type}&xid=${dataId}`} width="100%" height="100%" allow="fullscreen" frameBorder="0" scrolling="no"></iframe> 
 
-         <iframe src={`https://stream8.xyz/showvid.php?cat=${type}&xid=${dataId}`} width="100%" height="100%" allow="fullscreen" frameBorder="0" scrolling="no"></iframe> 
+      </Dialog>
+      <Dialog
+        visible={visible2}
+        modal={false}
+        className="transition-all p-4 w-full  h-[450px] md:w-[1800px] md:h-[780px] mx-auto my-auto"
+        onHide={() => {
+          if (!visible2) return
+          setVisible2(false)
+        }}
+      >
+           <iframe src={`https://stream8.xyz/showvid2.php?xid=${dataId}`} width="100%" height="100%" allow="fullscreen" frameBorder="0" scrolling="no"></iframe> 
 
       </Dialog>
     </div>
